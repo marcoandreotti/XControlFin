@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  xcontrolfin-api:
+    container_name: xcontrolfin_api_dev
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+      ASPNETCORE_URLS: http://0.0.0.0:8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./src/xControlFin.Api:/app/src/xControlFin.Api
