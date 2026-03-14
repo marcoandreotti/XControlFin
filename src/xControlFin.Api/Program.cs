@@ -111,20 +111,18 @@ if (!app.Environment.IsEnvironment("Docker"))
 //  SWAGGER / SCALAR
 // ──────────────────────────────────────────────
 //
-if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Docker"))
+app.MapOpenApi();
+
+app.MapScalarApiReference((options, context) =>
 {
-    app.MapOpenApi();
-    app.MapScalarApiReference((options, context) =>
-    {
-        var basePath = context.Request.PathBase.HasValue ? context.Request.PathBase.Value : "";
-        options.OpenApiRoutePattern = $"{basePath}/openapi/{{documentName}}.json";
-        options.Theme = ScalarTheme.Solarized;
-        options.Title = "XControlFin - Controle Financeiro";
-        options.Layout = ScalarLayout.Modern;
-        options.OperationSorter = OperationSorter.Alpha;
-        options.TagSorter = TagSorter.Alpha;
-    });
-}
+    var basePath = context.Request.PathBase.HasValue ? context.Request.PathBase.Value : "";
+    options.OpenApiRoutePattern = $"{basePath}/openapi/{{documentName}}.json";
+    options.Theme = ScalarTheme.Solarized;
+    options.Title = "XControlFin - Controle Financeiro";
+    options.Layout = ScalarLayout.Modern;
+    options.OperationSorter = OperationSorter.Alpha;
+    options.TagSorter = TagSorter.Alpha;
+});
 
 //
 // ──────────────────────────────────────────────
@@ -141,7 +139,7 @@ app.UseAuthorization();
 //
 app.MapGet("/", context =>
 {
-    context.Response.Redirect("/scalar/v1");
+    context.Response.Redirect("/scalar");
     return Task.CompletedTask;
 });
 
