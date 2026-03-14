@@ -46,10 +46,26 @@ public class FinancialController : ControllerBase
         return Ok(new { id });
     }
 
+    [HttpPost("planning/{id}/effectuate")]
+    public async Task<IActionResult> EffectuatePlanning(long id, [FromBody] EffectuateFinancialPlanningCommand command)
+    {
+        command.FinancialPlanningId = id;
+        var releaseId = await _dispatcher.SendAsync<long>(command);
+        return Ok(new { releaseId });
+    }
+
     [HttpDelete("planning/{id}")]
     public async Task<IActionResult> DeletePlanning(long id)
     {
         await _dispatcher.SendAsync(new DeleteFinancialPlanningCommand { Id = id });
+        return NoContent();
+    }
+
+    [HttpPut("planning/{id}")]
+    public async Task<IActionResult> UpdatePlanning(long id, [FromBody] UpdateFinancialPlanningCommand command)
+    {
+        command.Id = id;
+        await _dispatcher.SendAsync(command);
         return NoContent();
     }
 
