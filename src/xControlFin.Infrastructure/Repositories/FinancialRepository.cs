@@ -23,11 +23,32 @@ public class FinancialRepository : IFinancialRepository
             .ToListAsync(cancellationToken);
     }
 
+    public async Task<decimal> SumPreviousBalancesRealizedAsync(long financialInstitutionId, DateTime startDate, CancellationToken cancellationToken)
+    {
+        return await _context.FinancialReleases
+            .Where(x => x.FinancialInstitutionId == financialInstitutionId &&
+                        x.PaymentDate <= startDate)
+            .Select(x => x.Value)
+            .SumAsync(cancellationToken);
+    }
+
     public async Task<List<FinancialPlanningEntity>> GetPlannedReleasesAsync(long financialInstitutionId, CancellationToken cancellationToken)
     {
         // Pega planejamentos ativos que podem gerar lançamentos
         return await _context.FinancialPlannings
-            .Where(x => x.FinancialInstitutionId == financialInstitutionId && x.IsActive)
+            .Where(x => x.FinancialInstitutionId == financialInstitutionId &&
+                        x.IsActive)
             .ToListAsync(cancellationToken);
+    }
+
+    public async Task<decimal> SumPreviousBalancesPlannedAsync(long financialInstitutionId, DateTime startDate, CancellationToken cancellationToken)
+    {
+        // Pega planejamentos ativos que podem gerar lançamentos
+        return await _context.FinancialPlannings
+            .Where(x => x.FinancialInstitutionId == financialInstitutionId &&
+                        x.IsActive &&
+                        x.StartDate <= startDate)
+            .Select(x => x.Value)
+            .SumAsync(cancellationToken);
     }
 }

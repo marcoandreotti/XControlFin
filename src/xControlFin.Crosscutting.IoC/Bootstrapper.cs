@@ -51,7 +51,7 @@ public static class Bootstrapper
         services.AddScoped<IDispatcher, InMemoryDispatcher>();
 
         // Handlers - Financial Read
-        services.AddScoped<IQueryHandler<GetFinancialReleasesQuery, List<FinancialCheckDto>>, GetFinancialReleasesQueryHandler>();
+        services.AddScoped<IQueryHandler<GetFinancialReleasesQuery, FInancialChecksDto>, GetFinancialReleasesQueryHandler>();
 
         // Handlers - Users
         services.AddScoped<ICommandHandler<CreateUserCommand, long>, UserHandler>();

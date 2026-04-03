@@ -4,7 +4,7 @@ using xControlFin.Shared.Abstractions.Queries;
 
 namespace xControlFin.Application.Features.Financial.Queries;
 
-public class GetFinancialReleasesQuery : IQuery<List<FinancialCheckDto>>
+public class GetFinancialReleasesQuery : IQuery<FInancialChecksDto>
 {
     public long FinancialInstitutionId { get; set; }
     public DateTime StartDate { get; set; }

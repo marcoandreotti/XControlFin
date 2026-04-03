@@ -7,7 +7,7 @@ using xControlFin.Shared.Abstractions.Queries;
 
 namespace xControlFin.Application.Features.Financial.Handlers;
 
-public class GetFinancialReleasesQueryHandler : IQueryHandler<GetFinancialReleasesQuery, List<FinancialCheckDto>>
+public class GetFinancialReleasesQueryHandler : IQueryHandler<GetFinancialReleasesQuery, FInancialChecksDto>
 {
     private readonly IFinancialRepository _repository;
 
@@ -16,14 +16,14 @@ public class GetFinancialReleasesQueryHandler : IQueryHandler<GetFinancialReleas
         _repository = repository;
     }
 
-    public async Task<List<FinancialCheckDto>> HandleAsync(GetFinancialReleasesQuery query, CancellationToken cancellationToken = default)
+    public async Task<FInancialChecksDto> HandleAsync(GetFinancialReleasesQuery query, CancellationToken cancellationToken = default)
     {
-        var result = new List<FinancialCheckDto>();
+        var financialChecks = new List<FinancialCheckDto>();
 
         // 1. Buscar realizados no período
         var realized = await _repository.GetRealizedReleasesAsync(query.FinancialInstitutionId, query.StartDate, query.EndDate, cancellationToken);
 
-        result.AddRange(realized.Select(r => new FinancialCheckDto
+        financialChecks.AddRange(realized.Select(r => new FinancialCheckDto
         {
             Id = r.Id,
             CostCenterId = r.CostCenterId,
@@ -52,7 +52,7 @@ public class GetFinancialReleasesQueryHandler : IQueryHandler<GetFinancialReleas
 
                 if (!alreadyRealized)
                 {
-                    result.Add(new FinancialCheckDto
+                    financialChecks.Add(new FinancialCheckDto
                     {
                         Id = null,
                         CostCenterId = plan.CostCenterId,
@@ -68,7 +68,15 @@ public class GetFinancialReleasesQueryHandler : IQueryHandler<GetFinancialReleas
             }
         }
 
-        return result.OrderBy(x => x.PaymentDate).ToList();
+        var sumPreviousBalancesRealized = await _repository.SumPreviousBalancesRealizedAsync(query.FinancialInstitutionId, query.StartDate, cancellationToken);
+        var sumPreviousBalancesPlanned = await _repository.SumPreviousBalancesPlannedAsync(query.FinancialInstitutionId, query.StartDate, cancellationToken);
+
+        return new FInancialChecksDto
+        {
+            SumPreviousBalancesRealized = sumPreviousBalancesRealized,
+            SumPreviousBalancesPlanned = sumPreviousBalancesPlanned,
+            FinancialChecks = financialChecks.OrderBy(x => x.PaymentDate).ToList()
+        };
     }
 
     private IEnumerable<DateTime> GenerateDates(FinancialPlanningEntity plan, DateTime filterStart, DateTime filterEnd)

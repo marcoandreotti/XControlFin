@@ -1,5 +1,13 @@
 namespace xControlFin.Application.Features.Financial.Dtos;
 
+public class FInancialChecksDto
+{
+    public decimal SumPreviousBalancesRealized { get; set; }
+    public decimal SumPreviousBalancesPlanned { get; set; }
+
+    public List<FinancialCheckDto> FinancialChecks { get; set; } = new List<FinancialCheckDto>();
+}
+
 public class FinancialCheckDto
 {
     public long? Id { get; set; } // Null se for planejado (não persistido como release)
