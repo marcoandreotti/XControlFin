@@ -18,6 +18,20 @@ public class FinancialController : ControllerBase
         _dispatcher = dispatcher;
     }
 
+    [HttpGet("planning")]
+    public async Task<IActionResult> GetAllPlannings()
+    {
+        var result = await _dispatcher.QueryAsync(new GetAllFinancialPlanningsQuery());
+        return Ok(result);
+    }
+
+    [HttpGet("crud-releases")]
+    public async Task<IActionResult> GetAllCrudReleases()
+    {
+        var result = await _dispatcher.QueryAsync(new GetAllFinancialReleasesCrudQuery());
+        return Ok(result);
+    }
+
     [HttpGet("releases")]
     public async Task<IActionResult> GetReleases([FromQuery] long financialInstitutionId, [FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
     {

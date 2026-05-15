@@ -50,7 +50,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: http://0.0.0.0:8080
-      ConnectionStrings__Default: Host=postgres;Port=5432;Database=xcontrolfin;Username=admin;Password=admin123
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=xcontrolfin;Username=admin;Password=admin123
       ConnectionStrings__Redis: redis:6379,abortConnect=false
     ports:
       - "8080:8080"

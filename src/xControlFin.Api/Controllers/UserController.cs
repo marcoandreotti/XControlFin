@@ -34,6 +34,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
     {
         var id = await _dispatcher.SendAsync<long>(command);
