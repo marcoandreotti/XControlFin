@@ -60,6 +60,16 @@ services:
       redis:
         condition: service_healthy
 
+  xcontrolfin-vuejs:
+    container_name: xcontrolfin_vuejs
+    build:
+      context: ./src/xcontrolfin.vuejs
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - xcontrolfin-api
+
 volumes:
   postgres_data:
   redis_data:

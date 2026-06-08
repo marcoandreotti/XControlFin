@@ -10,3 +10,21 @@ services:
       - "8080:8080"
     volumes:
       - ./src/xControlFin.Api:/app/src/xControlFin.Api
+
+  xcontrolfin-vuejs:
+    container_name: xcontrolfin_vuejs_dev
+    build:
+      context: ./src/xcontrolfin.vuejs
+      dockerfile: Dockerfile
+      target: build-stage
+    command: npm run dev -- --host 0.0.0.0 --port 62195
+    ports:
+      - "62195:62195"
+    volumes:
+      - ./src/xcontrolfin.vuejs:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - VITE_API_PROXY_TARGET=http://host.docker.internal:8080
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
