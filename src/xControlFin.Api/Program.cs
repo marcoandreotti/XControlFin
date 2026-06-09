@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Scalar.AspNetCore;
@@ -87,6 +87,25 @@ builder.Services.RegisterServices(builder.Configuration);
 // ──────────────────────────────────────────────
 //
 var app = builder.Build();
+
+//
+// ──────────────────────────────────────────────
+//  INICIALIZAÇÃO DO BANCO DE DADOS
+// ──────────────────────────────────────────────
+//
+using (var scope = app.Services.CreateScope())
+{
+    try
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<xControlFin.Infrastructure.Data.XControlFinDbContext>();
+        await dbContext.Database.EnsureCreatedAsync();
+    }
+    catch (Exception ex)
+    {
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "Erro ao inicializar e criar o banco de dados.");
+    }
+}
 
 //
 // ──────────────────────────────────────────────

@@ -38,8 +38,29 @@ public static class Bootstrapper
     public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
     {
         // Data
+        var dbProvider = configuration["DatabaseProvider"] ?? "PostgreSQL";
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+
         services.AddDbContext<XControlFinDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+        {
+            switch (dbProvider.ToLowerInvariant())
+            {
+                case "sqlite":
+                    options.UseSqlite(connectionString);
+                    break;
+                case "msaccess":
+                case "jet":
+#pragma warning disable CA1416
+                    options.UseJet(connectionString);
+#pragma warning restore CA1416
+                    break;
+                case "postgresql":
+                case "postgres":
+                default:
+                    options.UseNpgsql(connectionString);
+                    break;
+            }
+        });
 
         // Repositories
         services.AddScoped<IFinancialRepository, FinancialRepository>();

@@ -20,5 +20,19 @@ public class XControlFinDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(XControlFinDbContext).Assembly);
+
+        if (Database.ProviderName != "Npgsql.EntityFrameworkCore.PostgreSQL")
+        {
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                foreach (var property in entityType.GetProperties())
+                {
+                    if (property.GetColumnType() == "timestamp")
+                    {
+                        property.SetColumnType(null);
+                    }
+                }
+            }
+        }
     }
 }
