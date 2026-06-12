@@ -100,14 +100,18 @@ Consulta de lançamentos **realizados** e **planejados**, filtrados por:
 
 ---
 
-## 🐳 Execução Local
+## 🐳 Execução Local e Bancos de Dados
 
-```
-# Subir containers
+Para subir os containers do ambiente de desenvolvimento local (incluindo Postgres e Redis), execute:
+```bash
 docker-compose up -d
 ```
 
-[Manual de acesso ao banco](docs/ACESSO_BANCO.md)
+O projeto suporta múltiplos provedores de banco de dados. Veja os guias específicos abaixo para instruções de execução de scripts de criação e acesso a cada banco:
+
+- 🐘 [Manual de Acesso ao PostgreSQL](docs/ACESSO_BANCO_POSTGRESQL.md)
+- 🗄️ [Manual de Acesso ao SQLite](docs/ACESSO_BANCO_SQLITE.md)
+- 💾 [Manual de Acesso ao MS Access](docs/ACESSO_BANCO_MSACCESS.md)
 
 
 ---
