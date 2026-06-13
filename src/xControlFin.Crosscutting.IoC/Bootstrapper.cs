@@ -46,7 +46,7 @@ public static class Bootstrapper
             switch (dbProvider.ToLowerInvariant())
             {
                 case "sqlite":
-                    options.UseSqlite(connectionString);
+                    options.UseSqlite(connectionString, sqliteOptions => sqliteOptions.CommandTimeout(30));
                     break;
                 case "msaccess":
                 case "jet":
