@@ -2,8 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using xControlFin.Application.Features.Auth.Commands;
+using xControlFin.Application.Features.Auth;
 using xControlFin.Application.Features.Auth.Dtos;
 using xControlFin.Application.Features.Auth.Handlers;
+using xControlFin.Application.Features.Auth.Queries;
 using xControlFin.Application.Features.CostCenters.Commands;
 using xControlFin.Application.Features.CostCenters.Handlers;
 using xControlFin.Application.Features.CostCenters.Queries;
@@ -48,12 +50,14 @@ public static class Bootstrapper
                 case "sqlite":
                     options.UseSqlite(connectionString, sqliteOptions => sqliteOptions.CommandTimeout(30));
                     break;
+
                 case "msaccess":
                 case "jet":
 #pragma warning disable CA1416
                     options.UseJet(connectionString);
 #pragma warning restore CA1416
                     break;
+
                 case "postgresql":
                 case "postgres":
                 default:
@@ -94,6 +98,7 @@ public static class Bootstrapper
         services.AddScoped<ICommandHandler<CreateFinancialInstitutionCommand, long>, CreateFinancialInstitutionCommandHandler>();
         services.AddScoped<ICommandHandler<UpdateFinancialInstitutionCommand>, FinancialInstitutionHandler>();
         services.AddScoped<ICommandHandler<DeleteFinancialInstitutionCommand>, FinancialInstitutionHandler>();
+        services.AddScoped<ICommandHandler<EffectuateFinancialPlanningCommand, long>, EffectuateFinancialPlanningCommandHandler>();
         services.AddScoped<IQueryHandler<GetFinancialInstitutionByIdQuery, FinancialInstitutionEntity?>, FinancialInstitutionHandler>();
         services.AddScoped<IQueryHandler<GetAllFinancialInstitutionsQuery, List<FinancialInstitutionEntity>>, FinancialInstitutionHandler>();
 
@@ -105,8 +110,11 @@ public static class Bootstrapper
         // Handlers - Auth
         services.AddScoped<ITokenProvider, TokenProvider>();
         services.AddScoped<IPasswordManager, PasswordManager>();
+        services.AddScoped<ICredentialAuthenticationService, CredentialAuthenticationService>();
         services.AddScoped<ICommandHandler<LoginCommand, AuthResponseDto>, AuthHandler>();
         services.AddScoped<ICommandHandler<RefreshTokenCommand, AuthResponseDto>, AuthHandler>();
+        services.AddScoped<ICommandHandler<LoginLocalCommand, LocalUserSessionDto?>, LocalAuthHandler>();
+        services.AddScoped<IQueryHandler<GetActiveLoginUsersQuery, List<LoginUserDto>>, LocalAuthHandler>();
 
         // Handlers - Financial Write CRUD
         services.AddScoped<ICommandHandler<CreateFinancialReleaseCommand, long>, CreateFinancialReleaseCommandHandler>();

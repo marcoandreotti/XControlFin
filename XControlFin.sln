@@ -24,9 +24,9 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{45ABDC48-AAD5-4619-858E-1D9FE4BAD399}"
 	ProjectSection(SolutionItems) = preProject
+		docs\ACESSO_BANCO_MSACCESS.md = docs\ACESSO_BANCO_MSACCESS.md
 		docs\ACESSO_BANCO_POSTGRESQL.md = docs\ACESSO_BANCO_POSTGRESQL.md
 		docs\ACESSO_BANCO_SQLITE.md = docs\ACESSO_BANCO_SQLITE.md
-		docs\ACESSO_BANCO_MSACCESS.md = docs\ACESSO_BANCO_MSACCESS.md
 		scripts\init-auth-msaccess.sql = scripts\init-auth-msaccess.sql
 		scripts\init-auth-postgresql.sql = scripts\init-auth-postgresql.sql
 		scripts\init-auth-sqlite.sql = scripts\init-auth-sqlite.sql
@@ -34,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "xcontrolfin.vuejs", "src\xControlFin.VueJs\xcontrolfin.vuejs.esproj", "{16AFBA96-4266-A09B-EB96-898B1BF98C3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xControlFin.WForm", "src\xControlFin.WForm\xControlFin.WForm.csproj", "{0FAE3B8A-A4C7-9E84-CAB4-297F4FEFA27B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -171,6 +173,18 @@ Global
 		{16AFBA96-4266-A09B-EB96-898B1BF98C3D}.Release|x86.ActiveCfg = Release|Any CPU
 		{16AFBA96-4266-A09B-EB96-898B1BF98C3D}.Release|x86.Build.0 = Release|Any CPU
 		{16AFBA96-4266-A09B-EB96-898B1BF98C3D}.Release|x86.Deploy.0 = Release|Any CPU
+		{0FAE3B8A-A4C7-9E84-CAB4-297F4FEFA27B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FAE3B8A-A4C7-9E84-CAB4-297F4FEFA27B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FAE3B8A-A4C7-9E84-CAB4-297F4FEFA27B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0FAE3B8A-A4C7-9E84-CAB4-297F4FEFA27B}.Debug|x64.Build.0 = Debug|Any CPU
+		{0FAE3B8A-A4C7-9E84-CAB4-297F4FEFA27B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0FAE3B8A-A4C7-9E84-CAB4-297F4FEFA27B}.Debug|x86.Build.0 = Debug|Any CPU
+		{0FAE3B8A-A4C7-9E84-CAB4-297F4FEFA27B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FAE3B8A-A4C7-9E84-CAB4-297F4FEFA27B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FAE3B8A-A4C7-9E84-CAB4-297F4FEFA27B}.Release|x64.ActiveCfg = Release|Any CPU
+		{0FAE3B8A-A4C7-9E84-CAB4-297F4FEFA27B}.Release|x64.Build.0 = Release|Any CPU
+		{0FAE3B8A-A4C7-9E84-CAB4-297F4FEFA27B}.Release|x86.ActiveCfg = Release|Any CPU
+		{0FAE3B8A-A4C7-9E84-CAB4-297F4FEFA27B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -185,6 +199,7 @@ Global
 		{B511DCAA-9610-4F92-A9F0-B3D725DB85EC} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{AB0DA494-0E04-4AFA-96D5-FF81C85FFB06} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{16AFBA96-4266-A09B-EB96-898B1BF98C3D} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{0FAE3B8A-A4C7-9E84-CAB4-297F4FEFA27B} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75432A9E-5BFB-462F-ABF5-BEC964511487}

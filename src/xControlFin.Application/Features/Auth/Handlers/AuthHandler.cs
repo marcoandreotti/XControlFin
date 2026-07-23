@@ -14,25 +14,31 @@ public class AuthHandler :
     ICommandHandler<RefreshTokenCommand, AuthResponseDto>
 {
     private readonly IBaseRepository<UserEntity> _userRepo;
+    private readonly ICredentialAuthenticationService _authenticationService;
     private readonly ITokenProvider _tokenProvider;
-    private readonly IPasswordManager _passwordManager;
     private readonly JwtSettings _jwtSettings;
 
-    public AuthHandler(IBaseRepository<UserEntity> userRepo, ITokenProvider tokenProvider, IPasswordManager passwordManager, IOptions<JwtSettings> jwtSettings)
+    public AuthHandler(
+        IBaseRepository<UserEntity> userRepo,
+        ICredentialAuthenticationService authenticationService,
+        ITokenProvider tokenProvider,
+        IOptions<JwtSettings> jwtSettings)
     {
         _userRepo = userRepo;
+        _authenticationService = authenticationService;
         _tokenProvider = tokenProvider;
-        _passwordManager = passwordManager;
         _jwtSettings = jwtSettings.Value;
     }
 
     public async Task<AuthResponseDto> HandleAsync(LoginCommand command, CancellationToken cancellationToken = default)
     {
-        var users = await _userRepo.GetAllAsync(cancellationToken);
-        var user = users.FirstOrDefault(u => u.Email == command.Email);
+        var user = await _authenticationService.AuthenticateByEmailAsync(
+            command.Email,
+            command.Password,
+            cancellationToken);
 
-        if (user == null || !_passwordManager.VerifyPassword(command.Password, user.Password))
-            throw new Exception("Invalid credentials");
+        if (user is null)
+            throw new UnauthorizedAccessException("Invalid credentials");
 
         var accessToken = _tokenProvider.GenerateAccessToken(user.Id, user.Email, user.Name);
         var refreshToken = _tokenProvider.GenerateRefreshToken();

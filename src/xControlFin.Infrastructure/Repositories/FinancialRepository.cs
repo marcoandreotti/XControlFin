@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using xControlFin.Domain.Entities;
+using xControlFin.Domain.Enums;
 using xControlFin.Domain.Interfaces;
 using xControlFin.Infrastructure.Data;
 
@@ -47,8 +48,53 @@ public class FinancialRepository : IFinancialRepository
         return await _context.FinancialPlannings
             .Where(x => x.FinancialInstitutionId == financialInstitutionId &&
                         x.IsActive &&
-                        x.StartDate <= startDate)
+                        x.StartDate < startDate)
             .Select(x => x.Value)
             .SumAsync(cancellationToken);
+    }
+
+    public async Task<decimal> SumPreviousBalancesPlannedWithIntervalsAsync(long financialInstitutionId, DateTime startDate, CancellationToken cancellationToken)
+    {
+        var plannings = await _context.FinancialPlannings
+            .Where(x => x.FinancialInstitutionId == financialInstitutionId && x.IsActive)
+            .ToListAsync(cancellationToken);
+
+        var realizedReleases = await _context.FinancialReleases
+            .Where(x => x.FinancialInstitutionId == financialInstitutionId &&
+                        x.FinancialPlanningId != null &&
+                        x.PaymentDate < startDate)
+            .ToListAsync(cancellationToken);
+
+        decimal totalSum = 0;
+
+        foreach (var plan in plannings)
+        {
+            var currentDate = plan.StartDate;
+
+            while (currentDate < startDate)
+            {
+                if (plan.EndDate.HasValue && currentDate > plan.EndDate.Value)
+                {
+                    break;
+                }
+
+                bool alreadyRealized = realizedReleases.Any(r => r.FinancialPlanningId == plan.Id && r.PaymentDate.Date == currentDate.Date);
+                if (!alreadyRealized)
+                {
+                    totalSum += plan.Value;
+                }
+
+                currentDate = plan.TimeInterval switch
+                {
+                    TimeIntervalEnum.Daily => currentDate.AddDays(1),
+                    TimeIntervalEnum.Weekly => currentDate.AddDays(7),
+                    TimeIntervalEnum.Monthly => currentDate.AddMonths(1),
+                    TimeIntervalEnum.Yearly => currentDate.AddYears(1),
+                    _ => currentDate.AddMonths(1)
+                };
+            }
+        }
+
+        return totalSum;
     }
 }

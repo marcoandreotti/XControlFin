@@ -11,4 +11,6 @@ public interface IFinancialRepository
     Task<List<FinancialPlanningEntity>> GetPlannedReleasesAsync(long financialInstitutionId, CancellationToken cancellationToken);
 
     Task<decimal> SumPreviousBalancesPlannedAsync(long financialInstitutionId, DateTime startDate, CancellationToken cancellationToken);
+
+    Task<decimal> SumPreviousBalancesPlannedWithIntervalsAsync(long financialInstitutionId, DateTime startDate, CancellationToken cancellationToken);
 }
