@@ -36,14 +36,6 @@ public partial class frmPrincipal : Form
         nudMonthsAhead.Minimum = 0;
         nudMonthsAhead.Maximum = 36;
         nudMonthsAhead.Value = _settings.MonthsAhead;
-
-        //_refreshButton.SetBounds(244, 29, 112, 36);
-        //_refreshButton.Text = "ATUALIZAR";
-        //_refreshButton.BackColor = Color.FromArgb(30, 165, 211);
-        //_refreshButton.ForeColor = Color.White;
-        //_refreshButton.FlatStyle = FlatStyle.Flat;
-        //_refreshButton.FlatAppearance.BorderSize = 0;
-        //_refreshButton.Click += async (_, _) => await ApplyFilterAsync();
     }
 
     private async Task ApplyFilterAsync()
@@ -63,9 +55,8 @@ public partial class frmPrincipal : Form
         try
         {
             SetBusy(true);
-            var dashboard = await _dispatcher.QueryAsync(
-                new GetDashboardQuery(_user.UserId, startDate, endDate, DateTime.Today));
-            //RenderBalances(dashboard);
+            var dashboard = await _dispatcher.QueryAsync(new GetDashboardQuery(_user.UserId, startDate, endDate, DateTime.Today));
+            RenderBalances(dashboard);
             gridLanc.DataSource = new BindingList<DashboardReleaseDto>(dashboard.Releases);
             gridLanc.ClearSelection();
             UpdateActionState();
@@ -176,6 +167,58 @@ public partial class frmPrincipal : Form
             () => _dispatcher.SendAsync(
                 new ChangeDashboardMovementDatesCommand(items, dialog.SelectedDate)),
             "alteração das datas");
+    }
+
+    private void RenderBalances(DashboardDto dashboard)
+    {
+        if (dashboard.Accounts.Count == 0)
+        {
+            lblPeriodo.Text = "Nenhuma conta ativa está vinculada ao usuário.";
+            lblPeriodo.ForeColor = Color.FromArgb(255, 0, 0);
+        }
+        else
+        {
+            lblPeriodo.ForeColor = Color.FromArgb(178, 178, 178);
+        }
+
+        lblRealizado.Text = dashboard.RealizedTotal.ToString("C2");
+        lblPrevisto.Text = dashboard.PlannedTotal.ToString("C2");
+        lblTotal.Text = dashboard.GrandTotal.ToString("C2");
+
+        SetColors(dashboard);
+    }
+
+    private void SetColors(DashboardDto dashboard)
+    {
+        var colorPositive = Color.FromArgb(15, 179, 223);
+        var colorNegative = Color.FromArgb(225, 0, 0);
+
+        if (dashboard.RealizedTotal > 0)
+        {
+            lblRealizado.ForeColor = colorPositive;
+        }
+        else if (dashboard.RealizedTotal < 0)
+        {
+            lblRealizado.ForeColor = colorNegative;
+        }
+
+        if (dashboard.PlannedTotal > 0)
+        {
+            lblPrevisto.ForeColor = colorPositive;
+        }
+        else if (dashboard.PlannedTotal < 0)
+        {
+            lblPrevisto.ForeColor = colorNegative;
+        }
+
+        if (dashboard.GrandTotal > 0)
+        {
+            lblTotal.ForeColor = colorPositive;
+        }
+        else if (dashboard.GrandTotal < 0)
+        {
+            lblTotal.ForeColor = colorNegative;
+        }
     }
 
     private void UpdateActionState()

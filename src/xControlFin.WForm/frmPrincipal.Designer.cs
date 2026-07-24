@@ -42,6 +42,12 @@ partial class frmPrincipal
         label2 = new Label();
         label1 = new Label();
         btnAtualizar = new Button();
+        label3 = new Label();
+        lblRealizado = new Label();
+        lblPrevisto = new Label();
+        label6 = new Label();
+        lblTotal = new Label();
+        label8 = new Label();
         ((System.ComponentModel.ISupportInitialize)gridLanc).BeginInit();
         ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
         panel1.SuspendLayout();
@@ -113,12 +119,12 @@ partial class frmPrincipal
         // 
         lblPeriodo.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         lblPeriodo.Font = new Font("Segoe UI", 7F);
-        lblPeriodo.ForeColor = Color.Gray;
+        lblPeriodo.ForeColor = Color.FromArgb(178, 178, 178);
         lblPeriodo.Location = new Point(650, 49);
         lblPeriodo.Name = "lblPeriodo";
         lblPeriodo.Size = new Size(422, 21);
         lblPeriodo.TabIndex = 2;
-        lblPeriodo.Text = "Olá";
+        lblPeriodo.Text = "Período e Msg";
         lblPeriodo.TextAlign = ContentAlignment.MiddleRight;
         // 
         // lblUser
@@ -189,12 +195,87 @@ partial class frmPrincipal
         btnAtualizar.UseVisualStyleBackColor = false;
         btnAtualizar.Click += btnAtualizar_Click;
         // 
+        // label3
+        // 
+        label3.AutoSize = true;
+        label3.Font = new Font("Segoe UI", 8F);
+        label3.Location = new Point(845, 73);
+        label3.Name = "label3";
+        label3.Size = new Size(60, 13);
+        label3.TabIndex = 7;
+        label3.Text = "Realizado:";
+        label3.TextAlign = ContentAlignment.MiddleRight;
+        // 
+        // lblRealizado
+        // 
+        lblRealizado.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
+        lblRealizado.ForeColor = Color.DimGray;
+        lblRealizado.Location = new Point(911, 73);
+        lblRealizado.Margin = new Padding(3, 0, 4, 0);
+        lblRealizado.Name = "lblRealizado";
+        lblRealizado.Size = new Size(161, 13);
+        lblRealizado.TabIndex = 7;
+        lblRealizado.Text = "0,00";
+        lblRealizado.TextAlign = ContentAlignment.MiddleRight;
+        // 
+        // lblPrevisto
+        // 
+        lblPrevisto.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
+        lblPrevisto.ForeColor = Color.DimGray;
+        lblPrevisto.Location = new Point(911, 89);
+        lblPrevisto.Margin = new Padding(3, 0, 4, 0);
+        lblPrevisto.Name = "lblPrevisto";
+        lblPrevisto.Size = new Size(161, 13);
+        lblPrevisto.TabIndex = 8;
+        lblPrevisto.Text = "0,00";
+        lblPrevisto.TextAlign = ContentAlignment.MiddleRight;
+        // 
+        // label6
+        // 
+        label6.AutoSize = true;
+        label6.Font = new Font("Segoe UI", 8F);
+        label6.Location = new Point(855, 89);
+        label6.Name = "label6";
+        label6.Size = new Size(50, 13);
+        label6.TabIndex = 9;
+        label6.Text = "Previsto:";
+        label6.TextAlign = ContentAlignment.MiddleRight;
+        // 
+        // lblTotal
+        // 
+        lblTotal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        lblTotal.ForeColor = Color.DimGray;
+        lblTotal.Location = new Point(911, 102);
+        lblTotal.Name = "lblTotal";
+        lblTotal.Size = new Size(161, 20);
+        lblTotal.TabIndex = 10;
+        lblTotal.Text = "0,00";
+        lblTotal.TextAlign = ContentAlignment.MiddleRight;
+        // 
+        // label8
+        // 
+        label8.AutoSize = true;
+        label8.Font = new Font("Segoe UI", 8F);
+        label8.Location = new Point(871, 107);
+        label8.Name = "label8";
+        label8.Size = new Size(34, 13);
+        label8.TabIndex = 11;
+        label8.Text = "Total:";
+        label8.TextAlign = ContentAlignment.MiddleRight;
+        // 
         // frmPrincipal
         // 
+        AcceptButton = btnAtualizar;
         AutoScaleDimensions = new SizeF(7F, 17F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.FromArgb(242, 246, 250);
         ClientSize = new Size(1084, 749);
+        Controls.Add(lblTotal);
+        Controls.Add(label8);
+        Controls.Add(lblPrevisto);
+        Controls.Add(label6);
+        Controls.Add(lblRealizado);
+        Controls.Add(label3);
         Controls.Add(btnAtualizar);
         Controls.Add(label1);
         Controls.Add(label2);
@@ -229,4 +310,12 @@ partial class frmPrincipal
     private Label label1;
     private Button btnAtualizar;
     private Label lblPeriodo;
+    private Label label3;
+    private Label label4;
+    private Label label5;
+    private Label label6;
+    private Label lblRealizado;
+    private Label lblPrevisto;
+    private Label lblTotal;
+    private Label label8;
 }
