@@ -98,7 +98,8 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var dbContext = scope.ServiceProvider.GetRequiredService<xControlFin.Infrastructure.Data.XControlFinDbContext>();
-        await dbContext.Database.EnsureCreatedAsync();
+        await xControlFin.Infrastructure.Data.DatabaseSchemaInitializer
+            .EnsureCompatibilityAsync(dbContext);
     }
     catch (Exception ex)
     {

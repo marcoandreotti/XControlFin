@@ -77,6 +77,7 @@ CREATE TABLE IF NOT EXISTS "FinancialReleases" (
     "FinancialPlanningId" bigint NULL,
     "PaymentDate" timestamp with time zone NOT NULL,
     "CompensationDate" timestamp with time zone NOT NULL,
+    "ScheduledDate" timestamp with time zone NULL,
     "Historic" text NOT NULL,
     "Parcel" integer NOT NULL,
     "TotalParcel" integer NOT NULL,

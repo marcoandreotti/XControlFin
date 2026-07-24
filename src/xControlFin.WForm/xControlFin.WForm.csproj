@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>logo_ico_xc.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="logo_ico_xc.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\xControlFin.Application\xControlFin.Application.csproj" />

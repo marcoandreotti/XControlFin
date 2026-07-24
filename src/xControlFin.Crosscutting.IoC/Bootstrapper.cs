@@ -9,6 +9,10 @@ using xControlFin.Application.Features.Auth.Queries;
 using xControlFin.Application.Features.CostCenters.Commands;
 using xControlFin.Application.Features.CostCenters.Handlers;
 using xControlFin.Application.Features.CostCenters.Queries;
+using xControlFin.Application.Features.Dashboard.Dtos;
+using xControlFin.Application.Features.Dashboard.Commands;
+using xControlFin.Application.Features.Dashboard.Handlers;
+using xControlFin.Application.Features.Dashboard.Queries;
 using xControlFin.Application.Features.Financial.Commands;
 using xControlFin.Application.Features.Financial.Dtos;
 using xControlFin.Application.Features.Financial.Handlers;
@@ -71,6 +75,7 @@ public static class Bootstrapper
 
         // Base Generic
         services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+        services.AddScoped<IUnitOfWork, EfUnitOfWork>();
 
         // Dispatcher
         services.AddScoped<IDispatcher, InMemoryDispatcher>();
@@ -115,6 +120,10 @@ public static class Bootstrapper
         services.AddScoped<ICommandHandler<RefreshTokenCommand, AuthResponseDto>, AuthHandler>();
         services.AddScoped<ICommandHandler<LoginLocalCommand, LocalUserSessionDto?>, LocalAuthHandler>();
         services.AddScoped<IQueryHandler<GetActiveLoginUsersQuery, List<LoginUserDto>>, LocalAuthHandler>();
+        services.AddScoped<IQueryHandler<GetDashboardQuery, DashboardDto>, DashboardHandler>();
+        services.AddScoped<ICommandHandler<EffectuateDashboardMovementsCommand>, DashboardMovementHandler>();
+        services.AddScoped<ICommandHandler<ChangeDashboardMovementDatesCommand>, DashboardMovementHandler>();
+        services.AddScoped<ICommandHandler<ReverseDashboardMovementsCommand>, DashboardMovementHandler>();
 
         // Handlers - Financial Write CRUD
         services.AddScoped<ICommandHandler<CreateFinancialReleaseCommand, long>, CreateFinancialReleaseCommandHandler>();

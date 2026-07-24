@@ -19,6 +19,9 @@ public class FinancialReleaseMapping : IEntityTypeConfiguration<FinancialRelease
 
         builder.Property(x => x.CompensationDate)
                .HasColumnType("timestamp");
+
+        builder.Property(x => x.ScheduledDate)
+               .HasColumnType("timestamp");
     }
 }
 

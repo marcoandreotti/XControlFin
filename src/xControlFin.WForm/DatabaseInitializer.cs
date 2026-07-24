@@ -8,7 +8,9 @@ internal static class DatabaseInitializer
 {
     public static void Initialize(XControlFinDbContext context)
     {
-        context.Database.EnsureCreated();
+        DatabaseSchemaInitializer.EnsureCompatibilityAsync(context)
+            .GetAwaiter()
+            .GetResult();
 
         if (context.Users.Any())
         {
@@ -25,4 +27,5 @@ internal static class DatabaseInitializer
         });
         context.SaveChanges();
     }
+
 }

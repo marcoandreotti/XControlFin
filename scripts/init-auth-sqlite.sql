@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS "FinancialReleases" (
     "FinancialPlanningId" INTEGER NULL,
     "PaymentDate" TEXT NOT NULL,
     "CompensationDate" TEXT NOT NULL,
+    "ScheduledDate" TEXT NULL,
     "Historic" TEXT NOT NULL,
     "Parcel" INTEGER NOT NULL,
     "TotalParcel" INTEGER NOT NULL,

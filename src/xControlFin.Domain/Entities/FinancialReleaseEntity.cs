@@ -14,6 +14,7 @@ public class FinancialReleaseEntity : BaseEntity
     public long? FinancialPlanningId { get; set; }
     public DateTime PaymentDate { get; set; }
     public DateTime CompensationDate { get; set; }
+    public DateTime? ScheduledDate { get; set; }
     public required string Historic { get; set; }
     public int Parcel { get; set; }
     public int TotalParcel { get; set; }

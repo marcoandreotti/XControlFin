@@ -72,6 +72,7 @@ CREATE TABLE [FinancialReleases] (
     [FinancialPlanningId] INTEGER NULL,
     [PaymentDate] DATETIME NOT NULL,
     [CompensationDate] DATETIME NOT NULL,
+    [ScheduledDate] DATETIME NULL,
     [Historic] MEMO NOT NULL,
     [Parcel] INTEGER NOT NULL,
     [TotalParcel] INTEGER NOT NULL,

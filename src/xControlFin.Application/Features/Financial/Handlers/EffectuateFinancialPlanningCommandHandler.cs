@@ -34,6 +34,7 @@ public class EffectuateFinancialPlanningCommandHandler : ICommandHandler<Effectu
             FinancialPlanningId = planning.Id,
             PaymentDate = paymentDate,
             CompensationDate = paymentDate,
+            ScheduledDate = planning.StartDate,
             Historic = command.OverrideHistoric ?? planning.Historic,
             Parcel = planning.StartParcel,
             TotalParcel = planning.TotalParcel,

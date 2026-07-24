@@ -24,7 +24,8 @@ internal static class Program
             using var loginForm = new frmLogin(dispatcher);
             if (loginForm.ShowDialog() == DialogResult.OK && loginForm.AuthenticatedUser is not null)
             {
-                System.Windows.Forms.Application.Run(new frmPrincipal(loginForm.AuthenticatedUser));
+                System.Windows.Forms.Application.Run(
+                    new frmPrincipal(loginForm.AuthenticatedUser, dispatcher));
             }
         }
         catch (Exception exception)
