@@ -120,14 +120,14 @@ public partial class frmPrincipal : Form
     private void SetBusy(bool busy)
     {
         UseWaitCursor = busy;
-        //_refreshButton.Enabled = !busy;
+        btnAtualizar.Enabled = !busy;
         nudDaysBack.Enabled = !busy;
         nudMonthsAhead.Enabled = !busy;
         if (busy)
         {
-            //_effectuateButton.Enabled = false;
-            //_changeDateButton.Enabled = false;
-            //_reverseButton.Enabled = false;
+            btnEfetivar.Enabled = false;
+            btnAlterarData.Enabled = false;
+            btnEstornar.Enabled = false;
         }
         else
         {
@@ -143,6 +143,31 @@ public partial class frmPrincipal : Form
             .OfType<DashboardReleaseDto>()
             .Distinct()
             .ToList();
+    }
+
+    private async Task EffectuateSelectedAsync()
+    {
+        var selected = GetSelectedMovements();
+        if (selected.Count == 0 || selected.Any(item => item.Realized))
+            return;
+
+        using var dialog = new MovementDateDialog(
+            "Efetivar lançamentos",
+            "Escolha a data de efetivação:",
+            DateTime.Today,
+            DateTime.Today);
+        if (dialog.ShowDialog(this) != DialogResult.OK)
+            return;
+
+        if (!ConfirmOperation(
+                $"Efetivar {selected.Count} lançamento(ões) em {dialog.SelectedDate:dd/MM/yyyy}?"))
+            return;
+
+        var items = selected.Select(ToSelection).ToList();
+        await ExecuteMovementCommandAsync(
+            () => _dispatcher.SendAsync(
+                new EffectuateDashboardMovementsCommand(items, dialog.SelectedDate)),
+            "efetivação dos lançamentos");
     }
 
     private async Task ChangeSelectedDatesAsync()
@@ -224,13 +249,10 @@ public partial class frmPrincipal : Form
     private void UpdateActionState()
     {
         var selected = GetSelectedMovements();
-        //_selectionLabel.Text = selected.Count == 0
-        //    ? "Selecione um ou mais lançamentos"
-        //    : $"{selected.Count} lançamento(ões) selecionado(s)";
-        //_effectuateButton.Enabled = selected.Count > 0 && selected.All(item => !item.Realized);
-        //_changeDateButton.Enabled = selected.Count > 0;
-        //_reverseButton.Enabled = selected.Count > 0 &&
-        //                         selected.All(item => item.Realized && item.ReleaseId.HasValue);
+        //_selectionLabel.Text = selected.Count == 0 ? "Selecione um ou mais lançamentos" : $"{selected.Count} lançamento(ões) selecionado(s)";
+        btnEfetivar.Enabled = selected.Count > 0 && selected.All(item => !item.Realized);
+        btnAlterarData.Enabled = selected.Count > 0;
+        btnEstornar.Enabled = selected.Count > 0 && selected.All(item => item.Realized && item.ReleaseId.HasValue);
     }
 
     private async Task ReverseSelectedAsync()
@@ -299,5 +321,20 @@ public partial class frmPrincipal : Form
     private async void btnAtualizar_Click(object sender, EventArgs e)
     {
         await ApplyFilterAsync();
+    }
+
+    private async void btnEfetivar_Click(object sender, EventArgs e)
+    {
+        await EffectuateSelectedAsync();
+    }
+
+    private async void btnAlterarData_Click(object sender, EventArgs e)
+    {
+        await ChangeSelectedDatesAsync();
+    }
+
+    private async void btnEstornar_Click(object sender, EventArgs e)
+    {
+        await ReverseSelectedAsync();
     }
 }

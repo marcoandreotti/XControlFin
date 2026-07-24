@@ -28,26 +28,29 @@ partial class frmPrincipal
     /// </summary>
     private void InitializeComponent()
     {
-        DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrincipal));
         gridLanc = new DataGridView();
         pictureBox1 = new PictureBox();
         panel1 = new Panel();
         lblPeriodo = new Label();
         lblUser = new Label();
+        btnEstornar = new Button();
+        btnAlterarData = new Button();
+        btnEfetivar = new Button();
         nudDaysBack = new NumericUpDown();
         nudMonthsAhead = new NumericUpDown();
         label2 = new Label();
         label1 = new Label();
-        btnAtualizar = new Button();
         label3 = new Label();
         lblRealizado = new Label();
         lblPrevisto = new Label();
         label6 = new Label();
         lblTotal = new Label();
         label8 = new Label();
+        btnAtualizar = new Button();
         ((System.ComponentModel.ISupportInitialize)gridLanc).BeginInit();
         ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
         panel1.SuspendLayout();
@@ -61,28 +64,28 @@ partial class frmPrincipal
         gridLanc.AllowUserToDeleteRows = false;
         gridLanc.AllowUserToResizeColumns = false;
         gridLanc.AllowUserToResizeRows = false;
-        dataGridViewCellStyle1.BackColor = Color.FromArgb(246, 249, 252);
-        dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-        gridLanc.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+        dataGridViewCellStyle10.BackColor = Color.FromArgb(246, 249, 252);
+        dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
+        gridLanc.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
         gridLanc.BackgroundColor = Color.White;
         gridLanc.BorderStyle = BorderStyle.None;
-        dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle2.BackColor = Color.FromArgb(20, 35, 55);
-        dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F);
-        dataGridViewCellStyle2.ForeColor = Color.White;
-        dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-        dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-        dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-        gridLanc.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+        dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle11.BackColor = Color.FromArgb(20, 35, 55);
+        dataGridViewCellStyle11.Font = new Font("Segoe UI", 10F);
+        dataGridViewCellStyle11.ForeColor = Color.White;
+        dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+        dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+        dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+        gridLanc.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
         gridLanc.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle3.BackColor = SystemColors.Window;
-        dataGridViewCellStyle3.Font = new Font("Segoe UI", 8F);
-        dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
-        dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-        dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-        dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-        gridLanc.DefaultCellStyle = dataGridViewCellStyle3;
+        dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle12.BackColor = SystemColors.Window;
+        dataGridViewCellStyle12.Font = new Font("Segoe UI", 10F);
+        dataGridViewCellStyle12.ForeColor = SystemColors.ControlText;
+        dataGridViewCellStyle12.SelectionBackColor = SystemColors.Highlight;
+        dataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText;
+        dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
+        gridLanc.DefaultCellStyle = dataGridViewCellStyle12;
         gridLanc.EnableHeadersVisualStyles = false;
         gridLanc.Location = new Point(0, 128);
         gridLanc.Name = "gridLanc";
@@ -139,6 +142,63 @@ partial class frmPrincipal
         lblUser.Text = "Olá";
         lblUser.TextAlign = ContentAlignment.MiddleRight;
         // 
+        // btnEstornar
+        // 
+        btnEstornar.BackColor = Color.FromArgb(20, 35, 55);
+        btnEstornar.Enabled = false;
+        btnEstornar.FlatAppearance.BorderColor = Color.FromArgb(205, 95, 70);
+        btnEstornar.FlatAppearance.BorderSize = 2;
+        btnEstornar.FlatAppearance.MouseDownBackColor = Color.FromArgb(15, 183, 229);
+        btnEstornar.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 51, 75);
+        btnEstornar.FlatStyle = FlatStyle.Flat;
+        btnEstornar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        btnEstornar.ForeColor = Color.White;
+        btnEstornar.Location = new Point(649, 73);
+        btnEstornar.Name = "btnEstornar";
+        btnEstornar.Size = new Size(150, 50);
+        btnEstornar.TabIndex = 3;
+        btnEstornar.Text = "↶  ESTORNAR";
+        btnEstornar.UseVisualStyleBackColor = false;
+        btnEstornar.Click += btnEstornar_Click;
+        // 
+        // btnAlterarData
+        // 
+        btnAlterarData.BackColor = Color.FromArgb(20, 35, 55);
+        btnAlterarData.Enabled = false;
+        btnAlterarData.FlatAppearance.BorderColor = Color.FromArgb(30, 125, 180);
+        btnAlterarData.FlatAppearance.BorderSize = 2;
+        btnAlterarData.FlatAppearance.MouseDownBackColor = Color.FromArgb(15, 183, 229);
+        btnAlterarData.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 51, 75);
+        btnAlterarData.FlatStyle = FlatStyle.Flat;
+        btnAlterarData.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        btnAlterarData.ForeColor = Color.White;
+        btnAlterarData.Location = new Point(493, 72);
+        btnAlterarData.Name = "btnAlterarData";
+        btnAlterarData.Size = new Size(150, 50);
+        btnAlterarData.TabIndex = 3;
+        btnAlterarData.Text = "◷  ALTERAR DATA";
+        btnAlterarData.UseVisualStyleBackColor = false;
+        btnAlterarData.Click += btnAlterarData_Click;
+        // 
+        // btnEfetivar
+        // 
+        btnEfetivar.BackColor = Color.FromArgb(20, 35, 55);
+        btnEfetivar.Enabled = false;
+        btnEfetivar.FlatAppearance.BorderColor = Color.FromArgb(35, 145, 90);
+        btnEfetivar.FlatAppearance.BorderSize = 2;
+        btnEfetivar.FlatAppearance.MouseDownBackColor = Color.FromArgb(15, 183, 229);
+        btnEfetivar.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 51, 75);
+        btnEfetivar.FlatStyle = FlatStyle.Flat;
+        btnEfetivar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        btnEfetivar.ForeColor = Color.White;
+        btnEfetivar.Location = new Point(337, 72);
+        btnEfetivar.Name = "btnEfetivar";
+        btnEfetivar.Size = new Size(150, 50);
+        btnEfetivar.TabIndex = 3;
+        btnEfetivar.Text = "✓  EFETIVAR";
+        btnEfetivar.UseVisualStyleBackColor = false;
+        btnEfetivar.Click += btnEfetivar_Click;
+        // 
         // nudDaysBack
         // 
         nudDaysBack.Location = new Point(3, 97);
@@ -176,24 +236,6 @@ partial class frmPrincipal
         label1.Size = new Size(84, 13);
         label1.TabIndex = 6;
         label1.Text = "Dias anteriores";
-        // 
-        // btnAtualizar
-        // 
-        btnAtualizar.BackColor = Color.White;
-        btnAtualizar.FlatAppearance.BorderColor = Color.FromArgb(30, 165, 211);
-        btnAtualizar.FlatAppearance.BorderSize = 2;
-        btnAtualizar.FlatAppearance.MouseDownBackColor = Color.Silver;
-        btnAtualizar.FlatAppearance.MouseOverBackColor = Color.FromArgb(224, 224, 224);
-        btnAtualizar.FlatStyle = FlatStyle.Flat;
-        btnAtualizar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-        btnAtualizar.ForeColor = Color.FromArgb(20, 35, 55);
-        btnAtualizar.Location = new Point(181, 76);
-        btnAtualizar.Name = "btnAtualizar";
-        btnAtualizar.Size = new Size(110, 47);
-        btnAtualizar.TabIndex = 6;
-        btnAtualizar.Text = "ATUALIZAR";
-        btnAtualizar.UseVisualStyleBackColor = false;
-        btnAtualizar.Click += btnAtualizar_Click;
         // 
         // label3
         // 
@@ -263,20 +305,40 @@ partial class frmPrincipal
         label8.Text = "Total:";
         label8.TextAlign = ContentAlignment.MiddleRight;
         // 
+        // btnAtualizar
+        // 
+        btnAtualizar.BackColor = Color.FromArgb(20, 35, 55);
+        btnAtualizar.FlatAppearance.BorderColor = Color.FromArgb(35, 145, 90);
+        btnAtualizar.FlatAppearance.BorderSize = 2;
+        btnAtualizar.FlatAppearance.MouseDownBackColor = Color.FromArgb(15, 183, 229);
+        btnAtualizar.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 51, 75);
+        btnAtualizar.FlatStyle = FlatStyle.Flat;
+        btnAtualizar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        btnAtualizar.ForeColor = Color.White;
+        btnAtualizar.Location = new Point(181, 72);
+        btnAtualizar.Name = "btnAtualizar";
+        btnAtualizar.Size = new Size(150, 50);
+        btnAtualizar.TabIndex = 3;
+        btnAtualizar.Text = "◊ ATUALIZAR";
+        btnAtualizar.UseVisualStyleBackColor = false;
+        btnAtualizar.Click += btnAtualizar_Click;
+        // 
         // frmPrincipal
         // 
-        AcceptButton = btnAtualizar;
         AutoScaleDimensions = new SizeF(7F, 17F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.FromArgb(242, 246, 250);
         ClientSize = new Size(1084, 749);
+        Controls.Add(btnEstornar);
         Controls.Add(lblTotal);
+        Controls.Add(btnAlterarData);
         Controls.Add(label8);
+        Controls.Add(btnAtualizar);
+        Controls.Add(btnEfetivar);
         Controls.Add(lblPrevisto);
         Controls.Add(label6);
         Controls.Add(lblRealizado);
         Controls.Add(label3);
-        Controls.Add(btnAtualizar);
         Controls.Add(label1);
         Controls.Add(label2);
         Controls.Add(nudMonthsAhead);
@@ -308,7 +370,6 @@ partial class frmPrincipal
     private NumericUpDown nudMonthsAhead;
     private Label label2;
     private Label label1;
-    private Button btnAtualizar;
     private Label lblPeriodo;
     private Label label3;
     private Label label4;
@@ -318,4 +379,8 @@ partial class frmPrincipal
     private Label lblPrevisto;
     private Label lblTotal;
     private Label label8;
+    private Button btnEfetivar;
+    private Button btnEstornar;
+    private Button btnAlterarData;
+    private Button btnAtualizar;
 }
