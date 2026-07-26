@@ -6,6 +6,7 @@ internal sealed class DashboardSettings
 {
     public int DaysBack { get; set; } = 7;
     public int MonthsAhead { get; set; } = 2;
+    public long InstituitionId { get; set; } = 0;
 }
 
 internal static class DashboardSettingsStore
@@ -28,6 +29,7 @@ internal static class DashboardSettingsStore
                 File.ReadAllText(SettingsPath)) ?? new DashboardSettings();
             settings.DaysBack = Math.Clamp(settings.DaysBack, 0, 365);
             settings.MonthsAhead = Math.Clamp(settings.MonthsAhead, 0, 36);
+            settings.InstituitionId = settings.InstituitionId <= 0 ? 0 : settings.InstituitionId;
             return settings;
         }
         catch

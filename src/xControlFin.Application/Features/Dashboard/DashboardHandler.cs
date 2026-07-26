@@ -54,6 +54,13 @@ public sealed class DashboardHandler(
             query.StartDate.Date,
             query.EndDate.Date.AddDays(1).AddTicks(-1));
 
+        if (query.InstitutionId > 0)
+        {
+            dashboardRows = dashboardRows
+                .Where(row => row.InstitutionId == query.InstitutionId)
+                .ToList();
+        }
+
         var balanceEnd = query.BalanceDate.Date.AddDays(1).AddTicks(-1);
         var balanceRows = CreateRows(
             institutions,

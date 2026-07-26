@@ -43,10 +43,10 @@ partial class frmLogin
         // pictureBox1
         // 
         pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-        pictureBox1.Location = new Point(80, 12);
+        pictureBox1.Location = new Point(59, 12);
         pictureBox1.Name = "pictureBox1";
-        pictureBox1.Size = new Size(472, 161);
-        pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+        pictureBox1.Size = new Size(542, 156);
+        pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
         pictureBox1.TabIndex = 0;
         pictureBox1.TabStop = false;
         // 
@@ -67,7 +67,7 @@ partial class frmLogin
         btnOk.TabIndex = 2;
         btnOk.Text = "ENTRAR";
         btnOk.UseVisualStyleBackColor = false;
-        btnOk.Click += this.btnOk_Click;
+        btnOk.Click += btnOk_Click;
         // 
         // btnCancelar
         // 
@@ -101,10 +101,12 @@ partial class frmLogin
         // txtSenha
         // 
         txtSenha.Font = new Font("Segoe UI", 12F);
+        txtSenha.HideSelection = false;
         txtSenha.Location = new Point(160, 283);
         txtSenha.Name = "txtSenha";
         txtSenha.Size = new Size(298, 29);
         txtSenha.TabIndex = 1;
+        txtSenha.Text = "admin123";
         txtSenha.UseSystemPasswordChar = true;
         // 
         // label2
@@ -119,8 +121,8 @@ partial class frmLogin
         // 
         // cboUsuario
         // 
-        cboUsuario.Font = new Font("Segoe UI", 12F);
         cboUsuario.DropDownStyle = ComboBoxStyle.DropDownList;
+        cboUsuario.Font = new Font("Segoe UI", 12F);
         cboUsuario.FormattingEnabled = true;
         cboUsuario.Location = new Point(160, 218);
         cboUsuario.Name = "cboUsuario";
@@ -139,6 +141,7 @@ partial class frmLogin
         // 
         // frmLogin
         // 
+        AcceptButton = btnOk;
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.FromArgb(20, 35, 55);
@@ -159,7 +162,6 @@ partial class frmLogin
         Name = "frmLogin";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Login";
-        AcceptButton = btnOk;
         ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
         ResumeLayout(false);
         PerformLayout();

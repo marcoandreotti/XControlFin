@@ -42,6 +42,9 @@ public partial class frmPrincipal : Form
     {
         _settings.DaysBack = decimal.ToInt32(nudDaysBack.Value);
         _settings.MonthsAhead = decimal.ToInt32(nudMonthsAhead.Value);
+        _settings.InstituitionId = cboAccount.SelectedItem is ComboBoxItem selectedAccount
+            ? selectedAccount.InstitutionId
+            : 0;
         DashboardSettingsStore.Save(_settings);
         await LoadDashboardAsync();
     }
@@ -55,7 +58,13 @@ public partial class frmPrincipal : Form
         try
         {
             SetBusy(true);
-            var dashboard = await _dispatcher.QueryAsync(new GetDashboardQuery(_user.UserId, startDate, endDate, DateTime.Today));
+            var dashboard = await _dispatcher.QueryAsync(
+                new GetDashboardQuery(
+                    _user.UserId,
+                    startDate,
+                    endDate,
+                    DateTime.Today,
+                    _settings.InstituitionId));
             RenderBalances(dashboard);
             gridLanc.DataSource = new BindingList<DashboardReleaseDto>(dashboard.Releases);
             gridLanc.ClearSelection();
@@ -71,6 +80,43 @@ public partial class frmPrincipal : Form
         }
     }
 
+    private void RenderBalances(DashboardDto dashboard)
+    {
+        if (dashboard.Accounts.Count == 0)
+        {
+            lblMsg.Text = "Nenhuma conta ativa está vinculada ao usuário.";
+            lblMsg.ForeColor = Color.FromArgb(255, 0, 0);
+        }
+        else
+        {
+            lblMsg.ForeColor = Color.FromArgb(178, 178, 178);
+            SetAccountSelect(dashboard);
+        }
+
+        lblRealizado.Text = dashboard.RealizedTotal.ToString("C2");
+        lblPrevisto.Text = dashboard.PlannedTotal.ToString("C2");
+        lblTotal.Text = dashboard.GrandTotal.ToString("C2");
+
+        SetColors(dashboard);
+    }
+
+    private void SetAccountSelect(DashboardDto dashboard)
+    {
+        if (cboAccount.Items.Count <= 0)
+        {
+            List<ComboBoxItem> lstAccounts = new List<ComboBoxItem> { new(0, "Todas as contas") };
+            lstAccounts.AddRange(dashboard.Accounts.Select(account => new ComboBoxItem(account.InstitutionId, account.InstitutionName)).ToList());
+
+            cboAccount.DataSource = lstAccounts.ToArray();
+            cboAccount.SelectedValue = _settings.InstituitionId;
+            if (cboAccount.SelectedIndex < 0)
+            {
+                cboAccount.SelectedValue = 0L;
+                _settings.InstituitionId = 0;
+            }
+        }
+    }
+
     private void BuildGrid()
     {
         AddGridColumn("PaymentDate", "Data", 90, "dd/MM/yyyy");
@@ -81,6 +127,7 @@ public partial class frmPrincipal : Form
         AddGridColumn("Value", "Valor", 110, "C2");
         gridLanc.CellFormatting += Grid_CellFormatting;
         gridLanc.SelectionChanged += (_, _) => UpdateActionState();
+        gridLanc.AutoGenerateColumns = false;
     }
 
     private void AddGridColumn(string property, string header, int fillWeight, string? format = null)
@@ -194,25 +241,6 @@ public partial class frmPrincipal : Form
             "alteração das datas");
     }
 
-    private void RenderBalances(DashboardDto dashboard)
-    {
-        if (dashboard.Accounts.Count == 0)
-        {
-            lblPeriodo.Text = "Nenhuma conta ativa está vinculada ao usuário.";
-            lblPeriodo.ForeColor = Color.FromArgb(255, 0, 0);
-        }
-        else
-        {
-            lblPeriodo.ForeColor = Color.FromArgb(178, 178, 178);
-        }
-
-        lblRealizado.Text = dashboard.RealizedTotal.ToString("C2");
-        lblPrevisto.Text = dashboard.PlannedTotal.ToString("C2");
-        lblTotal.Text = dashboard.GrandTotal.ToString("C2");
-
-        SetColors(dashboard);
-    }
-
     private void SetColors(DashboardDto dashboard)
     {
         var colorPositive = Color.FromArgb(15, 179, 223);
@@ -249,7 +277,7 @@ public partial class frmPrincipal : Form
     private void UpdateActionState()
     {
         var selected = GetSelectedMovements();
-        //_selectionLabel.Text = selected.Count == 0 ? "Selecione um ou mais lançamentos" : $"{selected.Count} lançamento(ões) selecionado(s)";
+        lblMsg.Text = selected.Count == 0 ? "Selecione um ou mais lançamentos" : $"{selected.Count} lançamento(ões) selecionado(s)";
         btnEfetivar.Enabled = selected.Count > 0 && selected.All(item => !item.Realized);
         btnAlterarData.Enabled = selected.Count > 0;
         btnEstornar.Enabled = selected.Count > 0 && selected.All(item => item.Realized && item.ReleaseId.HasValue);
@@ -302,22 +330,6 @@ public partial class frmPrincipal : Form
             MessageBoxIcon.Question,
             MessageBoxDefaultButton.Button2) == DialogResult.Yes;
 
-    private static void ConfigureActionButton(
-        Button button,
-        string text,
-        int left,
-        Color background)
-    {
-        button.SetBounds(left, 12, 128, 38);
-        button.Text = text;
-        button.BackColor = background;
-        button.ForeColor = Color.White;
-        button.FlatStyle = FlatStyle.Flat;
-        button.FlatAppearance.BorderSize = 0;
-        button.Font = new Font("Segoe UI", 9, FontStyle.Bold);
-        button.Cursor = Cursors.Hand;
-    }
-
     private async void btnAtualizar_Click(object sender, EventArgs e)
     {
         await ApplyFilterAsync();
@@ -336,5 +348,10 @@ public partial class frmPrincipal : Form
     private async void btnEstornar_Click(object sender, EventArgs e)
     {
         await ReverseSelectedAsync();
+    }
+
+    public sealed record ComboBoxItem(long InstitutionId, string InstitutionName)
+    {
+        public override string ToString() => InstitutionName;
     }
 }

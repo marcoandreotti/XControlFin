@@ -7,4 +7,5 @@ public sealed record GetDashboardQuery(
     long UserId,
     DateTime StartDate,
     DateTime EndDate,
-    DateTime BalanceDate) : IQuery<DashboardDto>;
+    DateTime BalanceDate,
+    long InstitutionId = 0) : IQuery<DashboardDto>;

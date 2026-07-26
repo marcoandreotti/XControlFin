@@ -53,7 +53,8 @@ public class FinancialController : ControllerBase
     public async Task<IActionResult> GetDashboard(
         [FromQuery] DateTime startDate,
         [FromQuery] DateTime endDate,
-        [FromQuery] DateTime? balanceDate = null)
+        [FromQuery] DateTime? balanceDate = null,
+        [FromQuery] long institutionId = 0)
     {
         var userIdValue = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (!long.TryParse(userIdValue, out var userId))
@@ -64,7 +65,8 @@ public class FinancialController : ControllerBase
                 userId,
                 startDate,
                 endDate,
-                balanceDate ?? DateTime.Today));
+                balanceDate ?? DateTime.Today,
+                institutionId));
         return Ok(result);
     }
 

@@ -28,9 +28,9 @@ partial class frmPrincipal
     /// </summary>
     private void InitializeComponent()
     {
-        DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrincipal));
         gridLanc = new DataGridView();
         pictureBox1 = new PictureBox();
@@ -51,6 +51,9 @@ partial class frmPrincipal
         lblTotal = new Label();
         label8 = new Label();
         btnAtualizar = new Button();
+        cboAccount = new ComboBox();
+        label4 = new Label();
+        lblMsg = new Label();
         ((System.ComponentModel.ISupportInitialize)gridLanc).BeginInit();
         ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
         panel1.SuspendLayout();
@@ -64,28 +67,31 @@ partial class frmPrincipal
         gridLanc.AllowUserToDeleteRows = false;
         gridLanc.AllowUserToResizeColumns = false;
         gridLanc.AllowUserToResizeRows = false;
-        dataGridViewCellStyle10.BackColor = Color.FromArgb(246, 249, 252);
-        dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
-        gridLanc.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+        dataGridViewCellStyle1.BackColor = Color.FromArgb(246, 249, 252);
+        dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+        gridLanc.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+        gridLanc.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+        gridLanc.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        gridLanc.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
         gridLanc.BackgroundColor = Color.White;
         gridLanc.BorderStyle = BorderStyle.None;
-        dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle11.BackColor = Color.FromArgb(20, 35, 55);
-        dataGridViewCellStyle11.Font = new Font("Segoe UI", 10F);
-        dataGridViewCellStyle11.ForeColor = Color.White;
-        dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-        dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
-        dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
-        gridLanc.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+        dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle2.BackColor = Color.FromArgb(20, 35, 55);
+        dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F);
+        dataGridViewCellStyle2.ForeColor = Color.White;
+        dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+        dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+        dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+        gridLanc.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
         gridLanc.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle12.BackColor = SystemColors.Window;
-        dataGridViewCellStyle12.Font = new Font("Segoe UI", 10F);
-        dataGridViewCellStyle12.ForeColor = SystemColors.ControlText;
-        dataGridViewCellStyle12.SelectionBackColor = SystemColors.Highlight;
-        dataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText;
-        dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
-        gridLanc.DefaultCellStyle = dataGridViewCellStyle12;
+        dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle3.BackColor = SystemColors.Window;
+        dataGridViewCellStyle3.Font = new Font("Segoe UI", 10F);
+        dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+        dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+        dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+        dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+        gridLanc.DefaultCellStyle = dataGridViewCellStyle3;
         gridLanc.EnableHeadersVisualStyles = false;
         gridLanc.Location = new Point(0, 128);
         gridLanc.Name = "gridLanc";
@@ -101,7 +107,7 @@ partial class frmPrincipal
         pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
         pictureBox1.Location = new Point(3, 3);
         pictureBox1.Name = "pictureBox1";
-        pictureBox1.Size = new Size(206, 62);
+        pictureBox1.Size = new Size(187, 52);
         pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         pictureBox1.TabIndex = 0;
         pictureBox1.TabStop = false;
@@ -115,7 +121,7 @@ partial class frmPrincipal
         panel1.Controls.Add(pictureBox1);
         panel1.Location = new Point(0, 0);
         panel1.Name = "panel1";
-        panel1.Size = new Size(1086, 70);
+        panel1.Size = new Size(1086, 57);
         panel1.TabIndex = 1;
         // 
         // lblPeriodo
@@ -123,7 +129,7 @@ partial class frmPrincipal
         lblPeriodo.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         lblPeriodo.Font = new Font("Segoe UI", 7F);
         lblPeriodo.ForeColor = Color.FromArgb(178, 178, 178);
-        lblPeriodo.Location = new Point(650, 49);
+        lblPeriodo.Location = new Point(650, 37);
         lblPeriodo.Name = "lblPeriodo";
         lblPeriodo.Size = new Size(422, 21);
         lblPeriodo.TabIndex = 2;
@@ -135,7 +141,7 @@ partial class frmPrincipal
         lblUser.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         lblUser.Font = new Font("Segoe UI", 12F);
         lblUser.ForeColor = Color.FromArgb(252, 114, 0);
-        lblUser.Location = new Point(669, 26);
+        lblUser.Location = new Point(669, 16);
         lblUser.Name = "lblUser";
         lblUser.Size = new Size(403, 21);
         lblUser.TabIndex = 1;
@@ -144,6 +150,7 @@ partial class frmPrincipal
         // 
         // btnEstornar
         // 
+        btnEstornar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         btnEstornar.BackColor = Color.FromArgb(20, 35, 55);
         btnEstornar.Enabled = false;
         btnEstornar.FlatAppearance.BorderColor = Color.FromArgb(205, 95, 70);
@@ -153,9 +160,9 @@ partial class frmPrincipal
         btnEstornar.FlatStyle = FlatStyle.Flat;
         btnEstornar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
         btnEstornar.ForeColor = Color.White;
-        btnEstornar.Location = new Point(649, 73);
+        btnEstornar.Location = new Point(649, 92);
         btnEstornar.Name = "btnEstornar";
-        btnEstornar.Size = new Size(150, 50);
+        btnEstornar.Size = new Size(150, 33);
         btnEstornar.TabIndex = 3;
         btnEstornar.Text = "↶  ESTORNAR";
         btnEstornar.UseVisualStyleBackColor = false;
@@ -163,6 +170,7 @@ partial class frmPrincipal
         // 
         // btnAlterarData
         // 
+        btnAlterarData.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         btnAlterarData.BackColor = Color.FromArgb(20, 35, 55);
         btnAlterarData.Enabled = false;
         btnAlterarData.FlatAppearance.BorderColor = Color.FromArgb(30, 125, 180);
@@ -172,9 +180,9 @@ partial class frmPrincipal
         btnAlterarData.FlatStyle = FlatStyle.Flat;
         btnAlterarData.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
         btnAlterarData.ForeColor = Color.White;
-        btnAlterarData.Location = new Point(493, 72);
+        btnAlterarData.Location = new Point(498, 92);
         btnAlterarData.Name = "btnAlterarData";
-        btnAlterarData.Size = new Size(150, 50);
+        btnAlterarData.Size = new Size(150, 33);
         btnAlterarData.TabIndex = 3;
         btnAlterarData.Text = "◷  ALTERAR DATA";
         btnAlterarData.UseVisualStyleBackColor = false;
@@ -182,6 +190,7 @@ partial class frmPrincipal
         // 
         // btnEfetivar
         // 
+        btnEfetivar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         btnEfetivar.BackColor = Color.FromArgb(20, 35, 55);
         btnEfetivar.Enabled = false;
         btnEfetivar.FlatAppearance.BorderColor = Color.FromArgb(35, 145, 90);
@@ -191,9 +200,9 @@ partial class frmPrincipal
         btnEfetivar.FlatStyle = FlatStyle.Flat;
         btnEfetivar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
         btnEfetivar.ForeColor = Color.White;
-        btnEfetivar.Location = new Point(337, 72);
+        btnEfetivar.Location = new Point(649, 58);
         btnEfetivar.Name = "btnEfetivar";
-        btnEfetivar.Size = new Size(150, 50);
+        btnEfetivar.Size = new Size(150, 33);
         btnEfetivar.TabIndex = 3;
         btnEfetivar.Text = "✓  EFETIVAR";
         btnEfetivar.UseVisualStyleBackColor = false;
@@ -201,17 +210,21 @@ partial class frmPrincipal
         // 
         // nudDaysBack
         // 
-        nudDaysBack.Location = new Point(3, 97);
+        nudDaysBack.Font = new Font("Segoe UI", 8F);
+        nudDaysBack.Location = new Point(8, 77);
         nudDaysBack.Name = "nudDaysBack";
-        nudDaysBack.Size = new Size(84, 25);
+        nudDaysBack.Size = new Size(82, 22);
         nudDaysBack.TabIndex = 3;
+        nudDaysBack.TextAlign = HorizontalAlignment.Right;
         // 
         // nudMonthsAhead
         // 
-        nudMonthsAhead.Location = new Point(93, 97);
+        nudMonthsAhead.Font = new Font("Segoe UI", 8F);
+        nudMonthsAhead.Location = new Point(96, 76);
         nudMonthsAhead.Name = "nudMonthsAhead";
-        nudMonthsAhead.Size = new Size(82, 25);
+        nudMonthsAhead.Size = new Size(82, 22);
         nudMonthsAhead.TabIndex = 6;
+        nudMonthsAhead.TextAlign = HorizontalAlignment.Right;
         // 
         // label2
         // 
@@ -219,7 +232,8 @@ partial class frmPrincipal
         label2.BackColor = Color.Transparent;
         label2.Font = new Font("Segoe UI", 8F);
         label2.ForeColor = Color.Black;
-        label2.Location = new Point(93, 81);
+        label2.ImageAlign = ContentAlignment.MiddleRight;
+        label2.Location = new Point(96, 60);
         label2.Name = "label2";
         label2.Size = new Size(82, 13);
         label2.TabIndex = 6;
@@ -231,7 +245,8 @@ partial class frmPrincipal
         label1.BackColor = Color.Transparent;
         label1.Font = new Font("Segoe UI", 8F);
         label1.ForeColor = Color.Black;
-        label1.Location = new Point(3, 81);
+        label1.ImageAlign = ContentAlignment.MiddleRight;
+        label1.Location = new Point(6, 61);
         label1.Name = "label1";
         label1.Size = new Size(84, 13);
         label1.TabIndex = 6;
@@ -239,6 +254,7 @@ partial class frmPrincipal
         // 
         // label3
         // 
+        label3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         label3.AutoSize = true;
         label3.Font = new Font("Segoe UI", 8F);
         label3.Location = new Point(845, 73);
@@ -250,6 +266,7 @@ partial class frmPrincipal
         // 
         // lblRealizado
         // 
+        lblRealizado.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         lblRealizado.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
         lblRealizado.ForeColor = Color.DimGray;
         lblRealizado.Location = new Point(911, 73);
@@ -262,6 +279,7 @@ partial class frmPrincipal
         // 
         // lblPrevisto
         // 
+        lblPrevisto.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         lblPrevisto.Font = new Font("Segoe UI", 8F, FontStyle.Bold);
         lblPrevisto.ForeColor = Color.DimGray;
         lblPrevisto.Location = new Point(911, 89);
@@ -274,6 +292,7 @@ partial class frmPrincipal
         // 
         // label6
         // 
+        label6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         label6.AutoSize = true;
         label6.Font = new Font("Segoe UI", 8F);
         label6.Location = new Point(855, 89);
@@ -285,6 +304,7 @@ partial class frmPrincipal
         // 
         // lblTotal
         // 
+        lblTotal.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         lblTotal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
         lblTotal.ForeColor = Color.DimGray;
         lblTotal.Location = new Point(911, 102);
@@ -296,6 +316,7 @@ partial class frmPrincipal
         // 
         // label8
         // 
+        label8.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         label8.AutoSize = true;
         label8.Font = new Font("Segoe UI", 8F);
         label8.Location = new Point(871, 107);
@@ -307,21 +328,59 @@ partial class frmPrincipal
         // 
         // btnAtualizar
         // 
+        btnAtualizar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         btnAtualizar.BackColor = Color.FromArgb(20, 35, 55);
-        btnAtualizar.FlatAppearance.BorderColor = Color.FromArgb(35, 145, 90);
+        btnAtualizar.FlatAppearance.BorderColor = Color.FromArgb(41, 50, 63);
         btnAtualizar.FlatAppearance.BorderSize = 2;
         btnAtualizar.FlatAppearance.MouseDownBackColor = Color.FromArgb(15, 183, 229);
         btnAtualizar.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 51, 75);
         btnAtualizar.FlatStyle = FlatStyle.Flat;
         btnAtualizar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
         btnAtualizar.ForeColor = Color.White;
-        btnAtualizar.Location = new Point(181, 72);
+        btnAtualizar.Location = new Point(498, 58);
         btnAtualizar.Name = "btnAtualizar";
-        btnAtualizar.Size = new Size(150, 50);
+        btnAtualizar.Size = new Size(150, 33);
         btnAtualizar.TabIndex = 3;
         btnAtualizar.Text = "◊ ATUALIZAR";
         btnAtualizar.UseVisualStyleBackColor = false;
         btnAtualizar.Click += btnAtualizar_Click;
+        // 
+        // cboAccount
+        // 
+        cboAccount.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+        cboAccount.Cursor = Cursors.Hand;
+        cboAccount.DisplayMember = "InstitutionName";
+        cboAccount.FormattingEnabled = true;
+        cboAccount.Location = new Point(184, 74);
+        cboAccount.Name = "cboAccount";
+        cboAccount.Size = new Size(306, 25);
+        cboAccount.TabIndex = 12;
+        cboAccount.ValueMember = "InstitutionId";
+        // 
+        // label4
+        // 
+        label4.AutoSize = true;
+        label4.BackColor = Color.Transparent;
+        label4.Font = new Font("Segoe UI", 8F);
+        label4.ForeColor = Color.Black;
+        label4.ImageAlign = ContentAlignment.MiddleRight;
+        label4.Location = new Point(184, 60);
+        label4.Name = "label4";
+        label4.Size = new Size(38, 13);
+        label4.TabIndex = 6;
+        label4.Text = "Conta";
+        // 
+        // lblMsg
+        // 
+        lblMsg.BackColor = Color.Transparent;
+        lblMsg.Font = new Font("Segoe UI", 10F);
+        lblMsg.ForeColor = Color.FromArgb(178, 178, 178);
+        lblMsg.Location = new Point(8, 102);
+        lblMsg.Name = "lblMsg";
+        lblMsg.Size = new Size(482, 23);
+        lblMsg.TabIndex = 6;
+        lblMsg.Text = "...";
+        lblMsg.TextAlign = ContentAlignment.MiddleCenter;
         // 
         // frmPrincipal
         // 
@@ -329,6 +388,7 @@ partial class frmPrincipal
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.FromArgb(242, 246, 250);
         ClientSize = new Size(1084, 749);
+        Controls.Add(cboAccount);
         Controls.Add(btnEstornar);
         Controls.Add(lblTotal);
         Controls.Add(btnAlterarData);
@@ -340,6 +400,8 @@ partial class frmPrincipal
         Controls.Add(lblRealizado);
         Controls.Add(label3);
         Controls.Add(label1);
+        Controls.Add(lblMsg);
+        Controls.Add(label4);
         Controls.Add(label2);
         Controls.Add(nudMonthsAhead);
         Controls.Add(nudDaysBack);
@@ -373,7 +435,7 @@ partial class frmPrincipal
     private Label lblPeriodo;
     private Label label3;
     private Label label4;
-    private Label label5;
+    private Label lblMsg;
     private Label label6;
     private Label lblRealizado;
     private Label lblPrevisto;
@@ -383,4 +445,5 @@ partial class frmPrincipal
     private Button btnEstornar;
     private Button btnAlterarData;
     private Button btnAtualizar;
+    private ComboBox cboAccount;
 }
